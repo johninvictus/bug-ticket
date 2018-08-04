@@ -1,0 +1,47 @@
+<mat-card class="mt-5">
+  <form class="add-form" #issueForm="ngForm" (ngSubmit)="onSubmit(issueForm)">
+    <mat-form-field class="full-width">
+      <input
+        matInput placeholder="Issue subject"
+        name="subject"
+        required
+        minlength="5"
+        [(ngModel)]="formData.subject"
+        #subjectInput="ngModel">
+
+      <mat-error [hidden]="!subjectInput.errors?.required">
+        subject is <strong>required</strong>
+      </mat-error>
+
+      <mat-error [hidden]="!subjectInput.errors?.minlength">
+        subject shoult contain more than <strong>(5)</strong> characters
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+    <textarea
+      matInput placeholder="Write a short description"
+      name="description"
+      required
+      minlength="10"
+      [(ngModel)]="formData.description"
+      #descriptionInput="ngModel">
+    </textarea>
+
+      <mat-error [hidden]="!descriptionInput.errors?.required">
+        Description is <strong>required</strong>
+      </mat-error>
+
+      <mat-error [hidden]="!descriptionInput.errors?.minlength">
+        Description shoult contain more than <strong>(10)</strong> characters
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="primary"
+      [disabled]="!issueForm.form.valid">Basic
+    </button>
+
+  </form>
+</mat-card>

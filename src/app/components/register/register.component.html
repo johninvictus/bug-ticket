@@ -1,0 +1,54 @@
+<mat-card class="mt-4">
+  <form #registrationForm="ngForm" (ngSubmit)="register(registrationForm)">
+    <div class="row m-4">
+
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Email"
+          name="email"
+          required
+          pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+          minlength="3"
+          [(ngModel)]="registerData.email"
+          #emailInput="ngModel">
+
+        <mat-error [hidden]="!emailInput.errors?.required">
+          Email is <strong>required</strong>
+        </mat-error>
+
+        <mat-error [hidden]="!emailInput.errors?.pattern">
+          Email should be <strong>valid</strong>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="full-width">
+        <input
+          matInput
+          placeholder="Password"
+          required
+          name="password"
+          minlength="3"
+          [(ngModel)]="registerData.password"
+          #passwordInput="ngModel">
+
+        <mat-error [hidden]="!passwordInput.errors?.required">
+          Password is <strong>required</strong>
+        </mat-error>
+
+        <mat-error [hidden]="!passwordInput.errors?.minlength">
+          Password should be more than 3 characters
+        </mat-error>
+
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        class="flex-shrink-0 flex-grow-0"
+        [disabled]="!registrationForm.form.valid">
+        Register
+      </button>
+    </div>
+  </form>
+</mat-card>
